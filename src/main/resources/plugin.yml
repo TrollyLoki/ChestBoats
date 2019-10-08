@@ -1,0 +1,6 @@
+name: ${project.artifactId}
+main: ${project.groupId}.Main
+version: ${project.version}
+author: TrollyLoki
+
+api-version: 1.14
