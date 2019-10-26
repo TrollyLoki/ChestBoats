@@ -64,10 +64,13 @@ public class Manager implements Listener {
 		Vehicle vehicle = event.getVehicle();
 		
 		if (vehicle.getType() == EntityType.BOAT) {
-			if (!vehicle.isEmpty() && vehicle.getPersistentDataContainer().has(ID, PersistentDataType.STRING)) {
-				
-				event.setCancelled(true);
-				
+			if (vehicle.getPersistentDataContainer().has(ID, PersistentDataType.STRING)) {
+				if (!MovementTask.chestBoats.contains(vehicle)) MovementTask.chestBoats.add((Boat) vehicle);
+				if (!vehicle.isEmpty()) {
+					
+					event.setCancelled(true);
+					
+				}
 			}
 		}
 	}
@@ -120,6 +123,7 @@ public class Manager implements Listener {
 			if (stack != null) location.getWorld().dropItemNaturally(location, stack);
 		}
 		
+		MovementTask.chestBoats.remove(boat);
 		boat.getPersistentDataContainer().remove(ID);
 		stand.remove();
 		
@@ -145,6 +149,7 @@ public class Manager implements Listener {
 		stand.setGravity(false);
 		stand.setSilent(true);
 		stand.setHelmet(new ItemStack(Material.CHEST));
+		MovementTask.chestBoats.add(boat);
 		
 	}
 	

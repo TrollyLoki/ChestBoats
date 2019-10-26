@@ -7,35 +7,17 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class MovementTask extends BukkitRunnable {
 	
+	public static List<Boat> chestBoats = new ArrayList<Boat>();
+	
 	public void run() {
 		
-		List<Boat> boats = new ArrayList<Boat>();
-		
-		/*for (World world : Bukkit.getWorlds()) {
-			
-			Chunk[] loadedChunks = world.getLoadedChunks();
-			for (int i = 0; i < loadedChunks.length; i++) {
-				
-				Entity[] entities = loadedChunks[i].getEntities();
-				for (int j = 0; j < loadedChunks.length; j++) {
-					
-					Entity entity = entities[j];
-					if (entity instanceof Boat) {
-						boats.add((Boat) entity);
-					}
-					
-				}
-				
-			}
-			
-		}*/
+		/*List<Boat> boats = new ArrayList<Boat>();
 		
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			
@@ -47,9 +29,9 @@ public class MovementTask extends BukkitRunnable {
 				
 			}
 			
-		}
+		}*/
 		
-		for (Boat boat : boats) {
+		for (Boat boat : chestBoats) {
 			
 			String id = boat.getPersistentDataContainer().get(Manager.ID, PersistentDataType.STRING);
 			if (id != null) {
