@@ -3,4 +3,4 @@ main: ${project.groupId}.Main
 version: ${project.version}
 author: TrollyLoki
 
-api-version: 1.14
+api-version: 1.16

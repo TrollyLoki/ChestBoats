@@ -148,7 +148,7 @@ public class Manager implements Listener {
 		stand.setVisible(false);
 		stand.setGravity(false);
 		stand.setSilent(true);
-		stand.setHelmet(new ItemStack(Material.CHEST));
+		stand.getEquipment().setHelmet(new ItemStack(Material.CHEST));
 		MovementTask.chestBoats.add(boat);
 		
 	}
