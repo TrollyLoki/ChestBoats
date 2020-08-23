@@ -12,37 +12,42 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class MovementTask extends BukkitRunnable {
-	
+
 	public static List<Boat> chestBoats = new ArrayList<Boat>();
-	
+
 	public void run() {
-		
-		/*List<Boat> boats = new ArrayList<Boat>();
-		
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			
-			for (Entity entity : player.getNearbyEntities(512, 512, 512)) {
-				
-				if (entity instanceof Boat) {
-					boats.add((Boat) entity);
-				}
-				
-			}
-			
-		}*/
-		
+
+		/*
+		 * List<Boat> boats = new ArrayList<Boat>();
+		 * 
+		 * for (Player player : Bukkit.getOnlinePlayers()) {
+		 * 
+		 * for (Entity entity : player.getNearbyEntities(512, 512, 512)) {
+		 * 
+		 * if (entity instanceof Boat) { boats.add((Boat) entity); }
+		 * 
+		 * }
+		 * 
+		 * }
+		 */
+
 		for (Boat boat : chestBoats) {
-			
+
 			String id = boat.getPersistentDataContainer().get(Manager.ID, PersistentDataType.STRING);
 			if (id != null) {
 				Entity stand = Bukkit.getEntity(UUID.fromString(id));
-				stand.teleport(Manager.getChestLocation(boat));
+				if (stand == null) {
+					Main.getPlugin().getLogger().warning("Armor Stand with UUID \"" + id + "\" for " + boat.getName()
+							+ " (UUID: " + boat.getUniqueId() + ") is missing");
+				} else {
+					stand.teleport(Manager.getChestLocation(boat));
+				}
 			}
-			
+
 		}
-		
+
 	}
-	
+
 	public static void start(Plugin plugin) {
 		new MovementTask().runTaskTimer(plugin, 20, 0);
 	}
